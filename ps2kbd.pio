@@ -1,0 +1,38 @@
+
+.program ps2kbd
+
+.wrap_target
+  wait 0 pin 1 ; Start Bit
+  wait 1 pin 1
+  set x, 8
+again:
+  wait 0 pin 1 ; Data Bits + Parity Bit
+  in pins, 1
+  wait 1 pin 1
+  jmp x-- again
+  wait 0 pin 1 ; Stop Bit
+  wait 1 pin 1
+  irq wait 0
+.wrap
+
+% c-sdk {
+static inline void ps2kbd_program_init(PIO pio, uint sm, uint offset)
+{
+  pio_sm_config c = ps2kbd_program_get_default_config(offset);
+  sm_config_set_in_shift(&c, true, true, 9); /* 8 Data Bits + Parity Bit */
+  sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_RX);
+
+  /* Configure pins 4 (Data) and 5 (Clock) as input. */
+  sm_config_set_in_pins(&c, 4);
+  pio_gpio_init(pio, 4);
+  pio_gpio_init(pio, 5);
+  pio_sm_set_consecutive_pindirs(pio, sm, 4, 2, false);
+
+  gpio_pull_up(4);
+  gpio_pull_up(5);
+
+  pio_sm_init(pio, sm, offset, &c);
+  pio_sm_set_enabled(pio, sm, true);
+}
+%}
+
