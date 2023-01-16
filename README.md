@@ -43,3 +43,10 @@ make
 
 Flash the resulting "terminominal.elf" file with SWD or transfer the "terminominal.uf2" file through USB in BOOTSEL mode.
 
+## Further Reading
+Information on my blog:
+* [VT100 Terminal Emulator on Raspberry Pi Pico](https://kobolt.github.io/article-198.html)
+
+YouTube video:
+* [Terminominal running cmatrix](https://www.youtube.com/watch?v=movhRMJprEs)
+
