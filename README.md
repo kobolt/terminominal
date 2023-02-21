@@ -46,6 +46,7 @@ Flash the resulting "terminominal.elf" file with SWD or transfer the "terminomin
 ## Further Reading
 Information on my blog:
 * [VT100 Terminal Emulator on Raspberry Pi Pico](https://kobolt.github.io/article-198.html)
+* [Monospaced 11x10 Font](https://kobolt.github.io/article-202.html)
 
 YouTube video:
 * [Terminominal running cmatrix](https://www.youtube.com/watch?v=movhRMJprEs)
